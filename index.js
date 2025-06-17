@@ -1,6 +1,24 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
+const usuarios = [
+    {
+        id: 1,
+        nome: 'Reginaldo',
+        idade: 27
+    },
+    {
+        id: 2,
+        nome: 'Nathalia',
+        idade: 30
+    },
+    {
+        id: 3,
+        nome: 'Raquel',
+        idade: 3
+    }
+]
+
 const typeDefs = `
     scalar Date
 
@@ -20,12 +38,15 @@ const typeDefs = `
         desconto: Int
         precoComDesconto:Float
     }
+
     #Pontos de Entrada
     type Query {
         ola: String,
         horaAtual:Date
-        usuarioLogado: Usuario,
+        usuarioLogado: Usuario
         produto: Produto
+        numerosMegaSena: [Int!]!
+        usuarios:[Usuario!]!
     }
 `;
 
@@ -65,7 +86,12 @@ const resolvers = {
             return  {
                 nome: "SSD",
                 preco: 350.55,
+                desconto: 10
             }
+        },
+        numerosMegaSena: () => Array(10).fill(0).map(() => parseInt(Math.random() * 60 + 1)).sort(),
+        usuarios(){
+            return usuarios
         }
     }
 };
