@@ -3,17 +3,17 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 
 const usuarios = [
     {
-        id: 1,
+        id: '1',
         nome: 'Reginaldo',
         idade: 27
     },
     {
-        id: 2,
+        id: '2',
         nome: 'Nathalia',
         idade: 30
     },
     {
-        id: 3,
+        id: '3',
         nome: 'Raquel',
         idade: 3
     }
@@ -47,6 +47,7 @@ const typeDefs = `
         produto: Produto
         numerosMegaSena: [Int!]!
         usuarios:[Usuario!]!
+        usuario(id: ID): Usuario
     }
 `;
 
@@ -90,8 +91,12 @@ const resolvers = {
             }
         },
         numerosMegaSena: () => Array(10).fill(0).map(() => parseInt(Math.random() * 60 + 1)).sort(),
-        usuarios(){
+        usuarios() {
             return usuarios
+        },
+        usuario(_, args){
+            const {id} = args
+            return usuarios.find(c=> c.id === id)
         }
     }
 };
