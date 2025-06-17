@@ -13,11 +13,19 @@ const typeDefs = `
         vip: Boolean,
         toString: String
     }
+    
+    type Produto {
+        nome: String!
+        preco: Float!
+        desconto: Int
+        precoComDesconto:Float
+    }
     #Pontos de Entrada
     type Query {
         ola: String,
         horaAtual:Date
-        usuarioLogado: Usuario
+        usuarioLogado: Usuario,
+        produto: Produto
     }
 `;
 
@@ -28,6 +36,12 @@ const resolvers = {
         },
         toString(usuario) {
             return 'Esse campo é tratado pelo resolver, mas não é proveniente do usuário propriamente dito'
+        }
+    },
+
+    Produto: {
+        precoComDesconto (produto) {
+            return produto.desconto ? produto.preco - (produto.desconto / 100) * produto.preco : produto.preco
         }
     },
     Query: {
@@ -45,6 +59,12 @@ const resolvers = {
                 idade: 23,
                 salario_real: 3233.88,
                 vip:true
+            }
+        },
+        produto (){
+            return  {
+                nome: "SSD",
+                preco: 350.55,
             }
         }
     }
