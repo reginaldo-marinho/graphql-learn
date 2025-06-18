@@ -5,17 +5,31 @@ const usuarios = [
     {
         id: '1',
         nome: 'Reginaldo',
-        idade: 27
+        idade: 27,
+        perfil_id: '2'
     },
     {
         id: '2',
         nome: 'Nathalia',
-        idade: 30
+        idade: 30,
+        perfil_id: '1'
     },
     {
         id: '3',
         nome: 'Raquel',
-        idade: 3
+        idade: 3,
+        perfil_id: '1'
+    }
+]
+
+const perfis = [
+    {
+        id: '1',
+        nome: 'Comum'
+    },
+    {
+        id: '2',
+        nome: 'Administrador'
     }
 ]
 
@@ -30,8 +44,10 @@ const typeDefs = `
         salario: Float
         vip: Boolean,
         toString: String
+        perfil_id: ID!
+        perfil:Perfil
     }
-    
+ 
     type Produto {
         nome: String!
         preco: Float!
@@ -39,6 +55,10 @@ const typeDefs = `
         precoComDesconto:Float
     }
 
+     type Perfil {
+        id: ID!
+        nome:String!
+    }
     #Pontos de Entrada
     type Query {
         ola: String,
@@ -48,6 +68,8 @@ const typeDefs = `
         numerosMegaSena: [Int!]!
         usuarios:[Usuario!]!
         usuario(id: ID): Usuario
+        perfis:[Perfil!]!
+        perfil(id: ID): Perfil
     }
 `;
 
@@ -58,7 +80,11 @@ const resolvers = {
         },
         toString(usuario) {
             return 'Esse campo é tratado pelo resolver, mas não é proveniente do usuário propriamente dito'
+        },
+        perfil(usuario){
+            return perfis.find(c=> c.id === usuario.perfil_id)
         }
+
     },
 
     Produto: {
@@ -97,6 +123,12 @@ const resolvers = {
         usuario(_, args){
             const {id} = args
             return usuarios.find(c=> c.id === id)
+        },
+        perfis() {
+            return perfis
+        },
+        perfil(_, {id}) {
+            return perfis.find(c=> c.id === id)
         }
     }
 };
