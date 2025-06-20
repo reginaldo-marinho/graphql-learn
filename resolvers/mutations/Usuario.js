@@ -1,4 +1,4 @@
-import {proximoId, usuarios} from '../data/db.js'
+import {proximoId, usuarios} from '../../data/db.js'
 
 function getIndexUsuario(input){
     
