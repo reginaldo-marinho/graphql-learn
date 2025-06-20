@@ -15,7 +15,8 @@ const usuarios = [
         nome: 'Nathalia',
         idade: 30,
         perfil_id: '1',
-        status: "INATIVO"
+        status: "INATIVO",
+        email:"na@gmail.com"
     },
     {
         id: proximoId(),

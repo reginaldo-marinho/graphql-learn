@@ -1,6 +1,6 @@
-# import Usuario from 'usuario.graphql'
+# import Usuario, InputUsuario, FiltroUpdateUsuario from 'usuario.graphql'
 type Mutation {
-    novoUsuario(nome: String email: String, idade: Int) : Usuario!
-    excluirUsuario(id: ID):Usuario
-    alterarUsuario(id: ID, nome:String, email: String, idade: Int):Usuario!
+    novoUsuario(input: InputUsuario) : Usuario!
+    excluirUsuario(input: InputUsuario):Usuario
+    alterarUsuario(filtro: FiltroUpdateUsuario, input: InputUsuario):Usuario!
 }

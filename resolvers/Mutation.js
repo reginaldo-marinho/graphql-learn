@@ -1,14 +1,29 @@
 import {proximoId, usuarios} from '../data/db.js'
 
-function getIndexUsuario(id){
-        let index = usuarios.findIndex(u => u.id === id)
+function getIndexUsuario(input){
+    
+    if(input === null) return -1
+
+    if(input.id)
+    {
+        let index = usuarios.findIndex(u => u.id === input.id)
         return index
+    }
+
+    if(input.email)
+    {
+        let index = usuarios.findIndex(u => u.email === input.email)
+        return index
+    }
+    return -1
 }
 
 export default {
-    novoUsuario (_, {nome, email, idade}){
-        let usuarioExiste =  usuarios
-        .some(c=> c.email === email)
+    novoUsuario (_, {input}){
+        
+        const {nome, email, idade} = input
+
+        let usuarioExiste =  usuarios.some(c=> c.email === email)
         
         if(usuarioExiste) throw new Error("Email já cadastrado para outro Usuário");
         
@@ -25,9 +40,9 @@ export default {
 
         return novo
     },
-    excluirUsuario(_,{id}){
+    excluirUsuario(_,{input}){
         
-        let  index = getIndexUsuario(id)
+        let  index = getIndexUsuario(input)
         if(index < 0 ) return null
 
         const excluidos = usuarios.splice(index,1)
@@ -35,14 +50,14 @@ export default {
         return excluidos ? excluidos[0] : null
 
     },
-    alterarUsuario(_,args){
+    alterarUsuario(_,{filtro, input}){
         
-        let  index = getIndexUsuario(args.id)
+        let  index = getIndexUsuario(filtro)
         if(index < 0 ) return null
 
         const usuario = {
             ...usuarios[index],
-            ...args
+            ...input
 
         }
         usuarios.splice(index,1,usuario)
