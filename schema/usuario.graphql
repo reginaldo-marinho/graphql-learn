@@ -8,9 +8,16 @@ type Usuario {
     toString: String
     perfil_id: ID!
     perfil:Perfil
+    status: UsuarioStatus
 }
 
 type Perfil {
     id: ID!
     nome:String!
+}
+
+enum UsuarioStatus {
+    ATIVO
+    INATIVO
+    BLOQUEADO
 }

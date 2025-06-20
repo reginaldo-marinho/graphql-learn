@@ -5,7 +5,7 @@ export default {
     salario(usuario) {
         return usuario.salario_real
     },
-    toString(usuario) {
+    toString() {
         return 'Esse campo é tratado pelo resolver, mas não é proveniente do usuário propriamente dito'
     },
     perfil(usuario){
