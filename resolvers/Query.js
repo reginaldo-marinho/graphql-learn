@@ -26,7 +26,6 @@ export default {
     },
     numerosMegaSena: () => Array(10).fill(0).map(() => parseInt(Math.random() * 60 + 1)).sort(),
     usuarios() {
-        console.log(usuarios)
         return usuarios
     },
     usuario(_, args){
@@ -37,7 +36,6 @@ export default {
         return perfis
     },
     perfil(_, {id}) {
-        console.log(id)
         return perfis.find(c=> c.id === id)
     }
 }

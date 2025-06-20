@@ -10,5 +10,5 @@ export default {
     },
     perfil(usuario){
         return perfis.find(c=> c.id === usuario.perfil_id)
-        }
+    }
 }
