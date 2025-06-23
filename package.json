@@ -10,8 +10,8 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "nodemon": "^3.1.10",
-        "@apollo/server": "^4.12.2"
+        "@apollo/server": "^4.12.2",
+        "nodemon": "^3.1.10"
     },
     "dependencies": {
         "@graphql-tools/graphql-file-loader": "^8.0.20",
